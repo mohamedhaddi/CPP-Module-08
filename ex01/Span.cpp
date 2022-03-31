@@ -6,12 +6,13 @@
 /*   By: mhaddi <mhaddi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:59:31 by mhaddi            #+#    #+#             */
-/*   Updated: 2022/03/31 18:44:03 by mhaddi           ###   ########.fr       */
+/*   Updated: 2022/03/31 22:43:04 by mhaddi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
+#include <vector>
 
 Span::Span(void) : _N(0)
 {
@@ -52,10 +53,18 @@ Span & Span::operator=(Span const &rhs)
 
 void Span::addNumber(int n)
 {
-	if (this->_numbers.size() < this->_N)
-		this->_numbers.push_back(n);
-	else
+	if (this->_numbers.size() == this->_N)
 		throw Span::MaximumCapacityReachedException();
+
+	this->_numbers.push_back(n);
+}
+
+void Span::fill(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	if (this->_numbers.size() + distance(begin, end) > this->_N)
+		throw Span::MaximumCapacityReachedException();
+
+	this->_numbers.insert(this->_numbers.end(), begin, end);
 }
 
 int Span::shortestSpan(void) const
@@ -63,16 +72,21 @@ int Span::shortestSpan(void) const
 	if (this->_numbers.size() < 2)
 		throw Span::NotEnoughNumbersException();
 
-	int min = std::abs(this->_numbers[0] - this->_numbers[1]);
+	std::vector<int> numbersCopy = this->_numbers;
+	std::sort(numbersCopy.begin(), numbersCopy.end());
 
-	for (unsigned int i = 0; i < this->_numbers.size() - 1; i++)
+	std::vector<int>::iterator it = numbersCopy.begin();
+
+	int minDiff = std::abs(*it - *(++it));
+
+	while (it != numbersCopy.end() - 1)
 	{
-		int diff = std::abs(this->_numbers[i] - this->_numbers[i + 1]);
-		if (diff < min)
-			min = diff;
+		int newDiff = std::abs(*it - *(++it));
+		if (newDiff < minDiff)
+			minDiff = newDiff;
 	}
 
-	return (min);
+	return (minDiff);
 }
 
 int Span::longestSpan(void) const
@@ -80,16 +94,12 @@ int Span::longestSpan(void) const
 	if (this->_numbers.size() < 2)
 		throw Span::NotEnoughNumbersException();
 
-	int max = std::abs(this->_numbers[0] - this->_numbers[1]);
+	std::vector<int> numbersCopy = this->_numbers;
+	std::sort(numbersCopy.begin(), numbersCopy.end());
 
-	for (unsigned int i = 0; i < this->_numbers.size() - 1; i++)
-	{
-		int diff = std::abs(this->_numbers[i] - this->_numbers[i + 1]);
-		if (diff > max)
-			max = diff;
-	}
+	int maxDiff = *(numbersCopy.end() - 1) - *numbersCopy.begin();
 
-	return (max);
+	return (maxDiff);
 }
 
 const char *Span::MaximumCapacityReachedException::what() const throw()
