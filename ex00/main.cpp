@@ -16,27 +16,27 @@
 
 int main()
 {
-	std::vector<int> coolNumbers;
+	std::vector<int> cringeNumbers;
 
-	coolNumbers.push_back(42);
-	coolNumbers.push_back(1337);
-	coolNumbers.push_back(420);
-	coolNumbers.push_back(69);
+	cringeNumbers.push_back(42);
+	cringeNumbers.push_back(1337);
+	cringeNumbers.push_back(420);
+	cringeNumbers.push_back(69);
 
-	std::vector<int>::iterator it = easyfind(coolNumbers, 420);
+	std::vector<int>::iterator it = easyfind(cringeNumbers, 420);
 
-	if (it != coolNumbers.end())
+	if (it != cringeNumbers.end())
 		std::cout 	<< "Found 420 at index "
-					<< std::distance(coolNumbers.begin(), it)
+					<< std::distance(cringeNumbers.begin(), it)
 					<< std::endl;
 	else
 		std::cout 	<< "420 not found" << std::endl;
 
-	it = easyfind(coolNumbers, 666);
+	it = easyfind(cringeNumbers, 666);
 
-	if (it != coolNumbers.end())
+	if (it != cringeNumbers.end())
 		std::cout 	<< "Found 666 at index "
-					<< std::distance(coolNumbers.begin(), it)
+					<< std::distance(cringeNumbers.begin(), it)
 					<< std::endl;
 	else
 		std::cout	<< "666 not found" << std::endl;

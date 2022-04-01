@@ -6,7 +6,7 @@
 /*   By: mhaddi <mhaddi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:51:46 by mhaddi            #+#    #+#             */
-/*   Updated: 2022/03/31 22:34:59 by mhaddi           ###   ########.fr       */
+/*   Updated: 2022/04/01 17:59:03 by mhaddi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ class Span {
 					std::vector<int>::iterator begin,
 					std::vector<int>::iterator end
 				);
-		std::vector<int> _numbers;
 
 	private:
 		
+		std::vector<int> _numbers;
 		unsigned int _N;
 
 		Span(void);
