@@ -6,15 +6,18 @@
 /*   By: mhaddi <mhaddi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 21:17:57 by mhaddi            #+#    #+#             */
-/*   Updated: 2022/04/01 21:25:10 by mhaddi           ###   ########.fr       */
+/*   Updated: 2022/04/01 21:43:32 by mhaddi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 #include <iostream>
+#include <list>
 
 int main()
 {
+	std::cout << "Using MutantStack: " << std::endl;
+
 	MutantStack<int> mstack;
 
 	mstack.push(5);
@@ -29,7 +32,6 @@ int main()
 	mstack.push(3);
 	mstack.push(5);
 	mstack.push(737);
-	//[...]
 	mstack.push(0);
 
 	MutantStack<int>::iterator it = mstack.begin();
@@ -45,5 +47,40 @@ int main()
 	}
 
 	std::stack<int> s(mstack);
+	
+	////////////////////////////////////////////////
+
+	std::cout << "Using std::list: " << std::endl;
+
+	std::list<int> mlist;
+
+	mlist.push_back(5);
+	mlist.push_back(17);
+
+	std::cout << mlist.back() << std::endl;
+
+	mlist.pop_back();
+
+	std::cout << mlist.size() << std::endl;
+
+	mlist.push_back(3);
+	mlist.push_back(5);
+	mlist.push_back(737);
+	mlist.push_back(0);
+
+	std::list<int>::iterator mlistIt = mlist.begin();
+	std::list<int>::iterator mlistIte = mlist.end();
+
+	++mlistIt;
+	--mlistIt;
+
+	while (mlistIt != mlistIte)
+	{
+		std::cout << *mlistIt << std::endl;
+		++mlistIt;
+	}
+
+	std::list<int> l(mlist);
+
 	return 0;
 }
